@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
   <ModulePrefs title="Thermometer" />
-	
+  
 	<!--Gadget and Author Information-->
 	title_url="http://code.google.com/p/thermometer-chart/"
 	author="Timothy R. Ondrey"
@@ -20,14 +20,87 @@
 		<EnumValue value="Blue" />
 		<EnumValue value="Green" />
 		<EnumValue value="Yellow" />
-    </UserPref> 
+    </UserPref>
 	
 	/>
   <Content type="html">
     <![CDATA[
     
-		Hello, world!
-		
-		]]>
+		<script>
+            
+        //	load prefs
+        var prefs = new gadgets.Prefs();
+
+        //  register startup function
+        gadgets.util.registerOnLoadHandler(makeGraph);
+
+        function genGraphURL(goal, progress, increments){
+                    
+            //  base chart string
+            var chartString = "http://chart.apis.google.com/chart?cht=";
+                   
+            //  use the vertical chart
+            chartString = chartString + "bvs&chxt=y";
+
+            //  use the vertical chart
+            chartString = chartString + "bvs&chxt=y";
+                       
+            //  size the vertical axis
+            chartString = chartString + "&chs=" + "100x" + 450;
+                        
+            //  also adjust gadget height
+            gadgets.window.adjustHeight(450);
+                    
+        }
+            
+        //  add colors
+        chartString = chartString + "&chco=" + foregroundColor + "," + backgroundColor;
+
+        //  setup range
+		chartString = chartString + "&chd=t:" + progress + "|" + goal;
+        chartString = chartString + "&chm=N$,000000,0,-1,11";
+
+        //  set bar width
+        chartString = chartString + "&chbh=" + 45;
+                    
+        //  set scaling
+        chartString = chartString + "&chds=0," + goal;  
+
+        //  set axis labels
+        chartString = chartString + "&chxl=0:";
+        for(i=0;i<=goal;i=i+(goal/increments)) {
+                        
+        chartString = chartString + "|$" + i;
+        }
+                    
+        return chartString;    
+                   
+       function makeGraph(){
+                    
+                    //  update the gadget title
+                    gadgets.window.setTitle(prefs.getString("chartTitle"));
+                    
+                    //  get the id of the chart image holder
+                    var chartImage = document.getElementById("chart");
+
+                    var goal = prefs.getString("goal");
+                    var current = prefs.getString("progress");
+               <!--     var bcolor = prefs.getString("goalColor");
+                    var fcolor = prefs.getString("currentColor");
+                    var orientation = prefs.getString("orientation"); -->
+                    var size = prefs.getString("450");
+                    var increments = prefs.getString("increments");
+                    var barWidth = prefs.getString("45");
+
+                    var url = genGraphURL(goal, progress, size, tickmarks, barWidth);
+                    
+                    //  set the source property
+                    chartImage.src = url;
+                }                  
+    </script>
+ 
+	<img id="chart"/>	
+
+		]]> 
 	</Content>
 </Module>
