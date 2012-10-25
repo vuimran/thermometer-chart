@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+  <ModulePrefs title="Thermometer" />
+	
+	<!--Gadget and Author Information-->
+	title_url="http://code.google.com/p/thermometer-chart/"
+	author="Timothy R. Ondrey"
+	author_email="Timothy.Ondrey1@gmail.com"
+	
+	<!--Feature Dependencies-->
+	<Require feature="dynamic-height"/>
+    <Require feature="settitle"/>
+	
+	<UserPref name="chartTitle" display_name="Thermometer Title" required="true" default_value="Goal Progress" />
+	<UserPref name="goal" display_name="Goal" required="true" default_value="0" />
+	<UserPref name="progress" display_name="Progress" required="true" default_value="0" />
+	<UserPref name="increments" display_name="Increments" required="true" default_value="1" />
+	<UserPref name="color" display_name="Progress Color" required="true" default_value="Red" datatype="enum" >
+		<EnumValue value="Red" />
+		<EnumValue value="Blue" />
+		<EnumValue value="Green" />
+		<EnumValue value="Yellow" />
+    </UserPref> 
+	
+	/>
+  <Content type="html">
+    <![CDATA[
+    
+		Hello, world!
+		
+		]]>
+	</Content>
+</Module>
