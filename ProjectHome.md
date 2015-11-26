@@ -1,0 +1,1 @@
+A chart resembling a thermometer. The user will be able to specify a numeric value for or a numeric cell in a spreadsheet for the current progress value and goal. The color of the progress bar will be editable and milestone's will display along the vertical axis.
